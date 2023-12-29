@@ -18,7 +18,7 @@ def output_expression(varname:str,varidxs:[int],linenum=8,databit=2)->None:
         
 
 def main():
-    varname , varidxs = get_varinfo("./config.txt")
+    varname , varidxs = get_varinfo("./key16_table.txt")
     output_expression(varname,varidxs)
 
 if __name__ == "__main__":
