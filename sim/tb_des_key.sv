@@ -108,7 +108,7 @@ initial begin
     end
 
     show_pass();
-    $finsh();
+    $finish();
 end
 
 endmodule
