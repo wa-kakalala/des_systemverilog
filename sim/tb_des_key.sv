@@ -1,19 +1,40 @@
 module tb_des_key();
+import show_info_pkg::*;
+///////////////////////////////////////
+logic  [63:0] origin_key_in       ;
+logic         verify_in           ;  
+logic         origin_key_in_valid ;  
 
-logic         clk_in        ;  
-logic         rst_n_in      ;  
-logic  [63:0] key_in        ;  
-logic  [3: 0] key_idx_in    ;  
-logic         key_in_valid  ;  
-logic  [47:0] key_out       ; 
-logic         key_out_valid ; 
+logic [55:0] sub_key_out          ;
+logic        sub_key_out_valid    ;  
+logic        sub_key_err_out      ;
+///////////////////////////////////////
+logic         clk_in            ;  
+logic         rst_n_in          ;  
+logic  [55:0] sub_key_in        ;  
+logic  [3: 0] sub_key_idx_in    ;  
+logic         sub_key_in_valid  ;  
+logic  [47:0] key_out           ; 
+logic         key_out_valid     ; 
+
+des_key_check des_key_check_inst(
+    .clk_in             (clk_in             ),
+    .rst_n_in           (rst_n_in           ),
+    .origin_key_in      (origin_key_in      ),
+    .verify_in          (verify_in          ),
+    .origin_key_in_valid(origin_key_in_valid),
+
+    .sub_key_out        (sub_key_out      ),
+    .sub_key_out_valid  (sub_key_out_valid),
+    .sub_key_err_out    (sub_key_err_out  )
+);
 
 des_key des_key_inst (
-    .clk_in           (clk_in       ),
-    .rst_n_in         (rst_n_in     ),
-    .key_in           (key_in       ),
-    .key_idx_in       (key_idx_in   ),
-    .key_in_valid     (key_in_valid ),
+    .clk_in           (clk_in           ),
+    .rst_n_in         (rst_n_in         ),
+    .sub_key_in       (sub_key_in       ),
+    .sub_key_idx_in   (sub_key_idx_in   ),
+    .sub_key_in_valid (sub_key_in_valid ),
 
     .key_out          (key_out      ),
     .key_out_valid    (key_out_valid)
@@ -40,46 +61,11 @@ logic [47:0] key_score_board [$] = {
     48'b111101010010111101010110101010101011011001111010
 };
 
-task automatic get_key(input logic [3:0] key_idx, input logic [64:0] key);
+task automatic get_key(input logic [3:0] key_idx, input logic [55:0] key);
     @(posedge clk_in); #1;
-    key_idx_in = key_idx;
-    key_in = key;
-    key_in_valid = 1'b1;
-endtask
-
-task automatic show_pass();
-begin: pass
-    $display("pwd: %m");
-    $display(".----------------.  .----------------.  .----------------.  .----------------. " ); 
-    $display("| .--------------. || .--------------. || .--------------. || .--------------. |");
-    $display("| |   ______     | || |      __      | || |    _______   | || |    _______   | |");
-    $display("| |  |_   __ \   | || |     /  \     | || |   /  ___  |  | || |   /  ___  |  | |");
-    $display("| |    | |__) |  | || |    / /\ \    | || |  |  (__ \_|  | || |  |  (__ \_|  | |");
-    $display("| |    |  ___/   | || |   / ____ \   | || |   '.___`-.   | || |   '.___`-.   | |");
-    $display("| |   _| |_      | || | _/ /    \ \_ | || |  |`\____) |  | || |  |`\____) |  | |");
-    $display("| |  |_____|     | || ||____|  |____|| || |  |_______.'  | || |  |_______.'  | |");
-    $display("| |              | || |              | || |              | || |              | |");
-    $display("| '--------------' || '--------------' || '--------------' || '--------------' |");
-    $display("'----------------'  '----------------'  '----------------'  '----------------' " );   
-    $display("time: %t",$time );
-end
-endtask
-
-task automatic show_fail();
-begin: fail
-    $display("pwd: %m");
-    $display(".----------------.  .----------------.  .----------------.  .----------------. " ); 
-    $display("| .--------------. || .--------------. || .--------------. || .--------------. |");
-    $display("| |  _________   | || |      __      | || |     _____    | || |   _____      | |");
-    $display("| | |_   ___  |  | || |     /  \     | || |    |_   _|   | || |  |_   _|     | |");
-    $display("| |   |  _|      | || |   / ____ \   | || |      | |     | || |    | |   _   | |");
-    $display("| |  _| |_       | || | _/ /    \ \_ | || |     _| |_    | || |   _| |__/ |  | |");
-    $display("| | |_____|      | || ||____|  |____|| || |    |_____|   | || |  |________|  | |");
-    $display("| |              | || |              | || |              | || |              | |");
-    $display("| '--------------' || '--------------' || '--------------' || '--------------' |");
-    $display("'----------------'  '----------------'  '----------------'  '----------------' " );
-    $display("time: %t",$time );
-end
+    sub_key_idx_in = key_idx;
+    sub_key_in = key;
+    sub_key_in_valid = 1'b1;
 endtask
 
 initial begin
@@ -89,20 +75,35 @@ end
 
 initial begin
     rst_n_in = 1'b0;
-    key_in = 64'b0;
-    key_idx_in = 16'b0;
-    key_in_valid = 1'b0;
+    sub_key_in = 'b0;
+    sub_key_idx_in = 'b0;
+    sub_key_in_valid = 1'b0;
+    origin_key_in = 'b0;
+    verify_in = 'b0;
+    origin_key_in_valid = 'b0;
 end
 
 initial begin
     @(posedge clk_in); #1;
     rst_n_in = 1'b1;
+    @(posedge clk_in); #1;
+    origin_key_in = key_ref;
+    verify_in = 1'b0;
+    origin_key_in_valid = 1'b1;
+    @(posedge sub_key_out_valid); #1;
     for( int i=0;i<key_score_board.size();i++) begin
-        get_key(i,key_ref);
-        @(posedge key_out_valid); #1;
+        get_key(i,sub_key_out);
+        while (1) begin
+            @(posedge clk_in ); #1;
+            if(key_out_valid == 1 ) begin
+                break;
+            end
+        end
         if( key_out != key_score_board[i]) begin
             show_fail();
             $finish();
+        end else begin
+            $display("%d -> ok",i);
         end
     end
 
