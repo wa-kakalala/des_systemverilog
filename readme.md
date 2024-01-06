@@ -16,3 +16,9 @@ Implement des algorithm with systemverilog
 - 2024/1/4  des_ip  module 's simulation is ok
 - 2024/1/4  des_ext  module 's simulation is ok
 - 2024/1/5  des_scomp  module 's simulation is ok
+- 2024/1/7  des_p  module 's coding is finished
+- 2024/1/7  des_xor48 && des_xor32  module 's coding is finished
+- 2024/1/7  des_invip  module 's coding is finished
+
+- 2024/1/7  des_ctrl  module 's design is finished
+- 2024/1/7  des module 's fsm is finished
