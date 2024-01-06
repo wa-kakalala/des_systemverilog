@@ -20,7 +20,7 @@ def output_expression(varname:str,varidxs:[int],linenum=8,databit=2)->None:
         
 
 def main():
-    varname , varidxs = get_varinfo("./select_ext_table.txt")
+    varname , varidxs = get_varinfo("./#ip_table.txt")
     output_expression(varname,varidxs)
 
 if __name__ == "__main__":

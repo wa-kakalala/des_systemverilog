@@ -1,11 +1,17 @@
-module des_xor(
+/**************************************
+@ filename    : des_xor32.sv
+@ author      : yyrwkk
+@ create time : 2024/01/07 05:07:24
+@ version     : v1.0.0
+**************************************/
+module des_xor48(
     input  logic        clk_in             ,
     input  logic        rst_n_in           ,
-    input  logic [47:0] ext_data_in        ,
-    input  logic [47:0] key_data_in        ,
+    input  logic [31:0] right_data__in     ,
+    input  logic [31:0] left_data_in       ,
     input  logic        data_in_valid      ,
 
-    output logic [47:0] xor_data_out       ,
+    output logic [31:0] xor_data_out       ,
     output logic        xor_data_out_valid 
 );
 
@@ -17,7 +23,7 @@ always_ff @(posedge clk_in or negedge rst_n_in) begin
         xor_data_out_reg <= 'b0;
         xor_data_out_valid_reg <= 'b0;
     end else if( data_in_valid ) begin
-        xor_data_out_reg <= ext_data_in ^ key_data_in;
+        xor_data_out_reg <= right_data__in ^ left_data_in;
         xor_data_out_valid_reg <= 1'b1;
     end else begin
         xor_data_out_reg <= xor_data_out_reg;

@@ -4,7 +4,11 @@ Implement des algorithm with systemverilog
 
 ## block diagram
 
-![image-20240105004535529](pic/image-20240105004535529.png)
+![image-20240107063909169](pic/image-20240107063909169.png)
+
+![image-20240107063935870](pic/image-20240107063935870.png)
+
+![image-20240107064423724](pic/image-20240107064423724.png)
 
 ## log
 
