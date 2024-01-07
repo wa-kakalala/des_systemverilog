@@ -1,3 +1,9 @@
+/**************************************
+@ filename    : des_ip.sv
+@ author      : yyrwkk
+@ create time : 2024/01/07 05:07:41
+@ version     : v1.0.0
+**************************************/
 module des_ip(
     input  logic        clk_in         ,
     input  logic        rst_n_in       ,

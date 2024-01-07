@@ -1,3 +1,9 @@
+/**************************************
+@ filename    : des_key_check.sv
+@ author      : yyrwkk
+@ create time : 2024/01/07 05:07:47
+@ version     : v1.0.0
+**************************************/
 module des_key_check(
     input logic         clk_in             ,
     input logic         rst_n_in           ,
@@ -20,7 +26,7 @@ always_ff @(posedge clk_in or negedge rst_n_in) begin
         sub_key_out_valid_reg <= 'b0;
     end else if( origin_key_in_valid ) begin
         sub_key_out_valid_reg <= 1'b1;
-        sub_key_out_reg ={
+        sub_key_out_reg <={
             origin_key_in[ 3], origin_key_in[11], origin_key_in[19], origin_key_in[27], origin_key_in[ 4], origin_key_in[12], origin_key_in[20], origin_key_in[28], 
             origin_key_in[36], origin_key_in[44], origin_key_in[52], origin_key_in[60], origin_key_in[ 5], origin_key_in[13], origin_key_in[21], origin_key_in[29],
             origin_key_in[37], origin_key_in[45], origin_key_in[53], origin_key_in[61], origin_key_in[ 6], origin_key_in[14], origin_key_in[22], origin_key_in[30],
@@ -40,10 +46,10 @@ always_ff @(posedge clk_in or negedge rst_n_in) begin
         sub_key_err_out_reg <= 'b0;
     end else if( origin_key_in_valid ) begin
         if( verify_in ) begin  // need to check odd parity
-            sub_key_err_out_reg = ~(^origin_key_in[63:56] & ^origin_key_in[55:48] & ^origin_key_in[47:40] & ^origin_key_in[39:32]
-                                   &^origin_key_in[31:24] & ^origin_key_in[23:16] & ^origin_key_in[15: 8] & ^origin_key_in[7:0 ]);
+            sub_key_err_out_reg <= ~( (^origin_key_in[63:56]) & (^origin_key_in[55:48]) & (^origin_key_in[47:40]) & (^origin_key_in[39:32])
+                                   & (^origin_key_in[31:24]) & (^origin_key_in[23:16]) & (^origin_key_in[15: 8]) & (^origin_key_in[7:0 ]));
         end else begin
-            sub_key_err_out_reg = 'b0;
+            sub_key_err_out_reg <= 'b0;
         end
     end else begin
         sub_key_err_out_reg <= 'b0;
