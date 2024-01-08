@@ -49,6 +49,9 @@ logic        xor32_data_valid   ;
 logic [63:0] inv_data           ; 
 logic        inv_data_valid     ;
 
+logic [31:0] xor32_left_data_ctrl      ;
+logic        xor32_left_data_valid_ctrl;
+
 /**
 * @ bref: key校验 + 去除校验位
 */
@@ -152,14 +155,14 @@ des_p des_p_inst(
 * @ bref: s运算后的数据和左侧数据异或
 */
 des_xor32 des_xor32_inst(
-    .clk_in             (clk_in          ),
-    .rst_n_in           (rst_n_in        ),
-    .right_data_in      (pdata_out       ),
-    .left_data_in       (left_data       ),
-    .data_in_valid      (pdata_out_valid ),
-
-    .xor_data_out       (xor32_data      ),
-    .xor_data_out_valid (xor32_data_valid)
+    .clk_in             (clk_in                     ),
+    .rst_n_in           (rst_n_in                   ),
+    .right_data_in      (pdata_out                  ),
+    .left_data_in       (xor32_left_data_ctrl       ),
+    .data_in_valid      ( pdata_out_valid
+                         &xor32_left_data_valid_ctrl),
+    .xor_data_out       (xor32_data                 ),
+    .xor_data_out_valid (xor32_data_valid           )
 );
 
 /**
@@ -179,34 +182,37 @@ des_invip des_invip_inst(
 * @bref: des控制模块
 */
 des_ctrl des_ctrl_inst ( 
-    .clk_in                   (clk_in             ),
-    .rst_n_in                 (rst_n_in           ),
-  
-    .encrypt_in_valid         (encrypt_in_valid   ),
-    .mode_in                  (mode_in            ),
-  
-    .sub_key_in               (sub_key            ),
-    .sub_key_in_valid         (sub_key_valid      ),
-    .check_error_in           (sub_key_err        ),
-  
-    .data_in_valid            (data_valid         ),
-    .right_data_in            (right_data         ),
-    .left_data_in             (left_data          ),
-  
-    .xor32_data_in_valid      (xor32_data_valid   ),
-    .xor32_data_in            (xor32_data         ),
- 
-    .sub_key_out              (sub_key_ctrl       ),
-    .sub_key_idx_out          (sub_key_idx_ctrl   ),
-    .sub_key_out_valid        (sub_key_valid_ctrl ),
+    .clk_in                   (clk_in                    ),
+    .rst_n_in                 (rst_n_in                  ),
+         
+    .encrypt_in_valid         (encrypt_in_valid          ),
+    .mode_in                  (mode_in                   ),
+         
+    .sub_key_in               (sub_key                   ),
+    .sub_key_in_valid         (sub_key_valid             ),
+    .check_error_in           (sub_key_err               ),
+         
+    .data_in_valid            (data_valid                ),
+    .right_data_in            (right_data                ),
+    .left_data_in             (left_data                 ),
+         
+    .xor32_data_in_valid      (xor32_data_valid          ),
+    .xor32_data_in            (xor32_data                ),
+        
+    .sub_key_out              (sub_key_ctrl              ),
+    .sub_key_idx_out          (sub_key_idx_ctrl          ),
+    .sub_key_out_valid        (sub_key_valid_ctrl        ),
 
-    .inv_data_out             (inv_data           ), 
-    .inv_data_out_valid       (inv_data_valid     ),
+    .xor32_left_data_out      (xor32_left_data_ctrl      ),
+    .xor32_left_data_out_valid(xor32_left_data_valid_ctrl),
 
-    .ext_data_out             (ext_data_ctrl      ), 
-    .ext_data_out_valid       (ext_data_valid_ctrl),
-
-    .encrypt_ready            (encrypt_ready      )
+    .inv_data_out             (inv_data                  ), 
+    .inv_data_out_valid       (inv_data_valid            ),
+       
+    .ext_data_out             (ext_data_ctrl             ), 
+    .ext_data_out_valid       (ext_data_valid_ctrl       ),
+       
+    .encrypt_ready            (encrypt_ready             )
 );
 
 endmodule

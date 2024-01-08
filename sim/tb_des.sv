@@ -25,7 +25,7 @@ initial begin
     @(posedge if_des_inst.clk_in);
     if_des_inst.key_in            <= {8{8'b01010100}};  // 0010 1010
     // if_des_inst.data_in           <= {8{8'b10001001}};  // 1001 0001
-    if_des_inst.data_in           <= 64'h2e7033340f4917f8; 
+    if_des_inst.data_in           <= 64'b0110110010011001011011000110111101100000001010101101110111111110; 
     if_des_inst.verify_in         <= 1'b1;
     if_des_inst.mode_in           <= 1'b1;
     // if_des_inst.mode_in           <= 'b0 ;

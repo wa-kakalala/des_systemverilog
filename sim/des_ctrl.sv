@@ -29,6 +29,9 @@ module des_ctrl (
     output logic [63:0] inv_data_out             , 
     output logic        inv_data_out_valid       ,
 
+    output logic [31:0] xor32_left_data_out      ,
+    output logic        xor32_left_data_out_valid,
+
     output logic [31:0] ext_data_out             , 
     output logic        ext_data_out_valid       ,
 
@@ -174,27 +177,31 @@ end
 */
 always_ff @(posedge clk_in or negedge rst_n_in ) begin
     if( !rst_n_in ) begin
-        iter              <= 4'b0;
-        encrypt_ready     <= 1'b1;
-        sub_key_out       <= 'b0 ;
-        sub_key_idx_out   <= 'b0 ;
-        sub_key_out_valid <= 1'b0;
-        ext_data_out      <= 'b0 ;
-        ext_data_out_valid<= 1'b0;
-        inv_data_out      <= 'b0 ; 
-        inv_data_out_valid<= 1'b0;           ;
+        iter                      <= 4'b0   ;
+        encrypt_ready             <= 1'b1   ;
+        sub_key_out               <= 'b0    ;
+        sub_key_idx_out           <= 'b0    ;
+        sub_key_out_valid         <= 1'b0   ;
+        ext_data_out              <= 'b0    ;
+        ext_data_out_valid        <= 1'b0   ;
+        inv_data_out              <= 'b0    ; 
+        inv_data_out_valid        <= 1'b0   ;           
+        xor32_left_data_out       <=  'b0   ;
+        xor32_left_data_out_valid <=  1'b0  ;
     end else begin
-        iter              <= iter           ;
-        encrypt_ready     <= 1'b0           ;
-        sub_key_out       <= sub_key_out    ;
-        sub_key_idx_out   <= sub_key_idx_out;
-        sub_key_out_valid <= 1'b0           ;
-
-        ext_data_out      <= ext_data_out   ;
-        ext_data_out_valid<= 1'b0           ;
-
-        inv_data_out      <= inv_data_out   ; 
-        inv_data_out_valid<= 1'b0           ;
+        iter                      <= iter                   ;
+        encrypt_ready             <= 1'b0                   ;
+        sub_key_out               <= sub_key_out            ;
+        sub_key_idx_out           <= sub_key_idx_out        ;
+        sub_key_out_valid         <= 1'b0                   ;
+                
+        ext_data_out              <= ext_data_out           ;
+        ext_data_out_valid        <= 1'b0                   ;
+                
+        inv_data_out              <= inv_data_out           ; 
+        inv_data_out_valid        <= 1'b0                   ;
+        xor32_left_data_out       <=  xor32_left_data_out   ;
+        xor32_left_data_out_valid <=  1'b0                  ;
 
         case( curr_state ) 
         S_IDLE : begin
@@ -219,14 +226,15 @@ always_ff @(posedge clk_in or negedge rst_n_in ) begin
 
         end
         S_P    : begin
-
+            xor32_left_data_out       <=  left_data;
+            xor32_left_data_out_valid <=  1'b1     ;
         end
         S_XOR32: begin
         end
         S_ITER : begin
             if( iter == 4'hf ) begin
                 iter <= iter;
-                inv_data_out  <=  {right_data,xor32_data_in}; 
+                inv_data_out  <=  {xor32_data_in,right_data}; 
                 inv_data_out_valid <= 1'b1;
             end else begin
                 iter <= iter + 1'b1;
