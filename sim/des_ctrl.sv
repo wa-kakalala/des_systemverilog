@@ -87,7 +87,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
 end
 
 /**
-* @ bref: 寄存right_data 和 left_data信号
+* @ bref: 寄存right_data �? left_data信号
 */
 always_ff @(posedge clk_in or negedge rst_n_in) begin
     if( !rst_n_in ) begin
@@ -106,7 +106,7 @@ always_ff @(posedge clk_in or negedge rst_n_in) begin
 end
 
 /**
-* @ bref: 三段式状态机的第一段
+* @ bref: 三段式状态机的第�?�?
 */
 always_ff @(posedge clk_in or negedge rst_n_in ) begin
     if( !rst_n_in ) begin
@@ -172,7 +172,7 @@ end
 
 /**
 * @ bref: 三段式状态机的第三段
-* @ note：使用next_state 可以节省一个时钟周期
+* @ note：使用next_state 可以节省�?个时钟周�?
           使用curr_state 会增加一个周期，这里因为节拍问题,使用curr_state
 */
 always_ff @(posedge clk_in or negedge rst_n_in ) begin
@@ -242,8 +242,8 @@ always_ff @(posedge clk_in or negedge rst_n_in ) begin
                 ext_data_out <= xor32_data_in;
                 ext_data_out_valid <= 1'b1   ;
 
-                sub_key_out <= sub_key_in    ;
-                sub_key_idx_out <= ( mode_in == 1'b1 )? (4'he -iter): (iter+1'b1) ;
+                sub_key_out <= sub_key       ;
+                sub_key_idx_out <= ( mode == 1'b1 )? (4'he -iter): (iter+1'b1) ;
                 sub_key_out_valid <= 1'b1    ;
             end
         end

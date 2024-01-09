@@ -215,4 +215,6 @@ des_ctrl des_ctrl_inst (
     .encrypt_ready            (encrypt_ready             )
 );
 
+assign encrypt_err = sub_key_err;
+
 endmodule

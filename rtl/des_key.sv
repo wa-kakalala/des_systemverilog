@@ -27,7 +27,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
         key_out_valid_reg <= 1'b1;
         case( sub_key_idx_in ) 
         4'd0: begin
-            key_out_reg = {
+            key_out_reg <= {
                 sub_key_in[30], sub_key_in[55], sub_key_in[34], sub_key_in[48], sub_key_in[40], sub_key_in[44], sub_key_in[51], sub_key_in[32], 
                 sub_key_in[54], sub_key_in[37], sub_key_in[47], sub_key_in[42], sub_key_in[46], sub_key_in[31], sub_key_in[43], sub_key_in[49],
                 sub_key_in[38], sub_key_in[28], sub_key_in[53], sub_key_in[45], sub_key_in[35], sub_key_in[29], sub_key_in[50], sub_key_in[39],
@@ -37,7 +37,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd1: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[29], sub_key_in[54], sub_key_in[33], sub_key_in[47], sub_key_in[39], sub_key_in[43], sub_key_in[50], sub_key_in[31], 
                 sub_key_in[53], sub_key_in[36], sub_key_in[46], sub_key_in[41], sub_key_in[45], sub_key_in[30], sub_key_in[42], sub_key_in[48],
                 sub_key_in[37], sub_key_in[55], sub_key_in[52], sub_key_in[44], sub_key_in[34], sub_key_in[28], sub_key_in[49], sub_key_in[38],
@@ -47,7 +47,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd2: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[55], sub_key_in[52], sub_key_in[31], sub_key_in[45], sub_key_in[37], sub_key_in[41], sub_key_in[48], sub_key_in[29],
                 sub_key_in[51], sub_key_in[34], sub_key_in[44], sub_key_in[39], sub_key_in[43], sub_key_in[28], sub_key_in[40], sub_key_in[46],
                 sub_key_in[35], sub_key_in[53], sub_key_in[50], sub_key_in[42], sub_key_in[32], sub_key_in[54], sub_key_in[47], sub_key_in[36],
@@ -57,7 +57,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd3: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[53], sub_key_in[50], sub_key_in[29], sub_key_in[43], sub_key_in[35], sub_key_in[39], sub_key_in[46], sub_key_in[55], 
                 sub_key_in[49], sub_key_in[32], sub_key_in[42], sub_key_in[37], sub_key_in[41], sub_key_in[54], sub_key_in[38], sub_key_in[44],
                 sub_key_in[33], sub_key_in[51], sub_key_in[48], sub_key_in[40], sub_key_in[30], sub_key_in[52], sub_key_in[45], sub_key_in[34],
@@ -67,7 +67,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd4: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[51], sub_key_in[48], sub_key_in[55], sub_key_in[41], sub_key_in[33], sub_key_in[37], sub_key_in[44], sub_key_in[53], 
                 sub_key_in[47], sub_key_in[30], sub_key_in[40], sub_key_in[35], sub_key_in[39], sub_key_in[52], sub_key_in[36], sub_key_in[42],
                 sub_key_in[31], sub_key_in[49], sub_key_in[46], sub_key_in[38], sub_key_in[28], sub_key_in[50], sub_key_in[43], sub_key_in[32],
@@ -77,7 +77,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd5: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[49], sub_key_in[46], sub_key_in[53], sub_key_in[39], sub_key_in[31], sub_key_in[35], sub_key_in[42], sub_key_in[51], 
                 sub_key_in[45], sub_key_in[28], sub_key_in[38], sub_key_in[33], sub_key_in[37], sub_key_in[50], sub_key_in[34], sub_key_in[40],
                 sub_key_in[29], sub_key_in[47], sub_key_in[44], sub_key_in[36], sub_key_in[54], sub_key_in[48], sub_key_in[41], sub_key_in[30],
@@ -87,7 +87,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd6: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[47], sub_key_in[44], sub_key_in[51], sub_key_in[37], sub_key_in[29], sub_key_in[33], sub_key_in[40], sub_key_in[49], 
                 sub_key_in[43], sub_key_in[54], sub_key_in[36], sub_key_in[31], sub_key_in[35], sub_key_in[48], sub_key_in[32], sub_key_in[38],
                 sub_key_in[55], sub_key_in[45], sub_key_in[42], sub_key_in[34], sub_key_in[52], sub_key_in[46], sub_key_in[39], sub_key_in[28],
@@ -97,7 +97,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd7: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[45], sub_key_in[42], sub_key_in[49], sub_key_in[35], sub_key_in[55], sub_key_in[31], sub_key_in[38], sub_key_in[47], 
                 sub_key_in[41], sub_key_in[52], sub_key_in[34], sub_key_in[29], sub_key_in[33], sub_key_in[46], sub_key_in[30], sub_key_in[36],
                 sub_key_in[53], sub_key_in[43], sub_key_in[40], sub_key_in[32], sub_key_in[50], sub_key_in[44], sub_key_in[37], sub_key_in[54],
@@ -107,7 +107,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd8: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[44], sub_key_in[41], sub_key_in[48], sub_key_in[34], sub_key_in[54], sub_key_in[30], sub_key_in[37], sub_key_in[46], 
                 sub_key_in[40], sub_key_in[51], sub_key_in[33], sub_key_in[28], sub_key_in[32], sub_key_in[45], sub_key_in[29], sub_key_in[35],
                 sub_key_in[52], sub_key_in[42], sub_key_in[39], sub_key_in[31], sub_key_in[49], sub_key_in[43], sub_key_in[36], sub_key_in[53],
@@ -117,7 +117,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd9: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[42], sub_key_in[39], sub_key_in[46], sub_key_in[32], sub_key_in[52], sub_key_in[28], sub_key_in[35], sub_key_in[44], 
                 sub_key_in[38], sub_key_in[49], sub_key_in[31], sub_key_in[54], sub_key_in[30], sub_key_in[43], sub_key_in[55], sub_key_in[33],
                 sub_key_in[50], sub_key_in[40], sub_key_in[37], sub_key_in[29], sub_key_in[47], sub_key_in[41], sub_key_in[34], sub_key_in[51],
@@ -127,7 +127,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd10: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[40], sub_key_in[37], sub_key_in[44], sub_key_in[30], sub_key_in[50], sub_key_in[54], sub_key_in[33], sub_key_in[42], 
                 sub_key_in[36], sub_key_in[47], sub_key_in[29], sub_key_in[52], sub_key_in[28], sub_key_in[41], sub_key_in[53], sub_key_in[31],
                 sub_key_in[48], sub_key_in[38], sub_key_in[35], sub_key_in[55], sub_key_in[45], sub_key_in[39], sub_key_in[32], sub_key_in[49],
@@ -137,7 +137,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd11: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[38], sub_key_in[35], sub_key_in[42], sub_key_in[28], sub_key_in[48], sub_key_in[52], sub_key_in[31], sub_key_in[40], 
                 sub_key_in[34], sub_key_in[45], sub_key_in[55], sub_key_in[50], sub_key_in[54], sub_key_in[39], sub_key_in[51], sub_key_in[29],
                 sub_key_in[46], sub_key_in[36], sub_key_in[33], sub_key_in[53], sub_key_in[43], sub_key_in[37], sub_key_in[30], sub_key_in[47],
@@ -147,7 +147,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd12: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[36], sub_key_in[33], sub_key_in[40], sub_key_in[54], sub_key_in[46], sub_key_in[50], sub_key_in[29], sub_key_in[38], 
                 sub_key_in[32], sub_key_in[43], sub_key_in[53], sub_key_in[48], sub_key_in[52], sub_key_in[37], sub_key_in[49], sub_key_in[55],
                 sub_key_in[44], sub_key_in[34], sub_key_in[31], sub_key_in[51], sub_key_in[41], sub_key_in[35], sub_key_in[28], sub_key_in[45],
@@ -157,7 +157,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd13: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[34], sub_key_in[31], sub_key_in[38], sub_key_in[52], sub_key_in[44], sub_key_in[48], sub_key_in[55], sub_key_in[36], 
                 sub_key_in[30], sub_key_in[41], sub_key_in[51], sub_key_in[46], sub_key_in[50], sub_key_in[35], sub_key_in[47], sub_key_in[53],
                 sub_key_in[42], sub_key_in[32], sub_key_in[29], sub_key_in[49], sub_key_in[39], sub_key_in[33], sub_key_in[54], sub_key_in[43],
@@ -167,7 +167,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd14: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[32], sub_key_in[29], sub_key_in[36], sub_key_in[50], sub_key_in[42], sub_key_in[46], sub_key_in[53], sub_key_in[34], 
                 sub_key_in[28], sub_key_in[39], sub_key_in[49], sub_key_in[44], sub_key_in[48], sub_key_in[33], sub_key_in[45], sub_key_in[51],
                 sub_key_in[40], sub_key_in[30], sub_key_in[55], sub_key_in[47], sub_key_in[37], sub_key_in[31], sub_key_in[52], sub_key_in[41],
@@ -177,7 +177,7 @@ always_ff @( posedge clk_in or negedge rst_n_in) begin
             };
         end
         4'd15: begin
-            key_out_reg ={
+            key_out_reg <={
                 sub_key_in[31], sub_key_in[28], sub_key_in[35], sub_key_in[49], sub_key_in[41], sub_key_in[45], sub_key_in[52], sub_key_in[33],
                 sub_key_in[55], sub_key_in[38], sub_key_in[48], sub_key_in[43], sub_key_in[47], sub_key_in[32], sub_key_in[44], sub_key_in[50],
                 sub_key_in[39], sub_key_in[29], sub_key_in[54], sub_key_in[46], sub_key_in[36], sub_key_in[30], sub_key_in[51], sub_key_in[40],
